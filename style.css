@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Rajdhani:wght@500;600;700&display=swap');
+
+:root {
+    --green: #00ff41;
+    --red: #ff003c;
+    --purple: #b700ff;
+    --dark: #050505;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    width: 100%; height: 100%;
+    background: var(--dark);
+    overflow: hidden;
+    font-family: 'Rajdhani', sans-serif;
+    user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bg-dark {
+    position: fixed; inset: 0; z-index: 0;
+    background: radial-gradient(circle at center, #141416 0%, #050505 100%);
+}
+
+.scanlines {
+    position: fixed; inset: 0; z-index: 2; pointer-events: none;
+    background: repeating-linear-gradient(0deg, transparent 0px, transparent 3px, rgba(0,0,0,0.3) 4px, rgba(0,0,0,0.3) 5px);
+}
+
+.noise {
+    position: fixed; inset: 0; z-index: 3; pointer-events: none; opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: noiseShift 0.3s steps(2) infinite;
+}
+@keyframes noiseShift { 
+    0% { transform: translate(0,0); } 
+    50% { transform: translate(-3px, 2px); } 
+    100% { transform: translate(2px, -1px); } 
+}
+
+.scene-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.card-container {
+    position: relative; 
+    z-index: 10;
+    width: 420px;
+    margin-left: -100px; 
+}
+
+.cappy-sitting {
+    position: absolute;
+    z-index: 15; 
+    right: -140px; 
+    top: -280px;   
+    width: 380px; 
+    height: auto;
+    mix-blend-mode: multiply; 
+    filter: drop-shadow(0 0 15px rgba(255, 0, 60, 0.3));
+    pointer-events: none;
+    animation: cappySwing 4s ease-in-out infinite alternate;
+    transform-origin: bottom left;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 60%, 75% 60%, 75% 100%, 0% 100%);
+}
+
+@keyframes cappySwing {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-5px) rotate(-1deg); }
+}
+
+.card {
+    background: #16161a;
+    border: 1px solid #2a2a30;
+    border-radius: 24px;
+    padding: 35px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.9), 0 0 0 1px rgba(255,255,255,0.02) inset;
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.2s;
+    animation: cardJitter 5s infinite;
+}
+
+@keyframes cardJitter {
+    0%, 94%, 100% { transform: translate(0, 0); }
+    95% { transform: translate(-2px, 1px); }
+    96% { transform: translate(2px, -1px); }
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #444;
+}
+
+.card-header {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.avatar {
+    width: 120px; 
+    height: 120px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #0a0a0d;
+}
+
+.avatar-inner {
+    width: 100%; 
+    height: 100%;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    position: relative;
+}
+
+.avatar-inner img {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover;
+    object-position: center;
+}
+
+.avatar-placeholder {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 3rem; 
+    font-weight: 900; 
+    color: #444; 
+}
+
+.header-info {
+    display: flex; flex-direction: column; gap: 5px;
+}
+
+.name {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1;
+    letter-spacing: 1px;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #e0e0e0;
+}
+
+.faction {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--red);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+.description {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #b0b0a5;
+    margin-bottom: 25px;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.social-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    background: #0a0a0d;
+    border: 1px solid #2a2a30;
+    color: #a0a0a5;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.social-btn svg {
+    width: 22px;
+    height: 22px;
+}
+
+.social-btn.tiktok:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ffffff;
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+    transform: translateY(-3px);
+}
+
+.social-btn.telegram:hover {
+    background: rgba(0, 136, 204, 0.1);
+    border-color: #0088cc;
+    color: #0088cc;
+    box-shadow: 0 0 15px rgba(0, 136, 204, 0.4);
+    transform: translateY(-3px);
+}
+
+@media (max-width: 900px) {
+    .cappy-sitting { display: none; }
+    .card-container { margin-left: 0; }
+}
+
+@media (max-width: 500px) {
+    .card-container { width: 90%; }
+    .card { padding: 25px; }
+    .card-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+    .avatar { width: 100px; height: 100px; }
+    .name { font-size: 2rem; }
+}
