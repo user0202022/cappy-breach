@@ -20,11 +20,17 @@ html, body {
     align-items: center;
 }
 
+/* ============================================
+   ГЛУБОКИЙ ТЕМНЫЙ ФОН
+   ============================================ */
 .bg-dark {
     position: fixed; inset: 0; z-index: 0;
     background: radial-gradient(circle at center, #141416 0%, #050505 100%);
 }
 
+/* ============================================
+   СКАНЛАЙНЫ + ШУМ
+   ============================================ */
 .scanlines {
     position: fixed; inset: 0; z-index: 2; pointer-events: none;
     background: repeating-linear-gradient(0deg, transparent 0px, transparent 3px, rgba(0,0,0,0.3) 4px, rgba(0,0,0,0.3) 5px);
@@ -41,6 +47,9 @@ html, body {
     100% { transform: translate(2px, -1px); } 
 }
 
+/* ============================================
+   ОБЩАЯ СЦЕНА
+   ============================================ */
 .scene-wrapper {
     position: relative;
     display: flex;
@@ -57,6 +66,9 @@ html, body {
     margin-left: -100px; 
 }
 
+/* ============================================
+   КАПРИ (ПОВЕРХ КАРТОЧКИ)
+   ============================================ */
 .cappy-sitting {
     position: absolute;
     z-index: 15; 
@@ -77,6 +89,9 @@ html, body {
     100% { transform: translateY(-5px) rotate(-1deg); }
 }
 
+/* ============================================
+   САМА КАРТОЧКА
+   ============================================ */
 .card {
     background: #16161a;
     border: 1px solid #2a2a30;
@@ -101,6 +116,7 @@ html, body {
     border-color: #444;
 }
 
+/* --- Шапка карточки --- */
 .card-header {
     display: flex;
     gap: 25px;
@@ -131,13 +147,6 @@ html, body {
     height: 100%; 
     object-fit: cover;
     object-position: center;
-}
-
-.avatar-placeholder {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 3rem; 
-    font-weight: 900; 
-    color: #444; 
 }
 
 .header-info {
@@ -217,15 +226,75 @@ html, body {
     transform: translateY(-3px);
 }
 
+/* ============================================
+   АДАПТИВ (ТЕЛЕФОНЫ И ПЛАНШЕТЫ)
+   ============================================ */
+
+/* Планшеты (ширина меньше 900px) */
 @media (max-width: 900px) {
-    .cappy-sitting { display: none; }
-    .card-container { margin-left: 0; }
+    /* Убираем сдвиг карточки, ставим по центру */
+    .card-container { 
+        margin-left: 0; 
+        width: 90%;
+        max-width: 500px;
+    }
+    
+    /* Капри прячем, чтобы не мешала читать на узком экране */
+    .cappy-sitting { 
+        display: none; 
+    }
 }
 
-@media (max-width: 500px) {
-    .card-container { width: 90%; }
-    .card { padding: 25px; }
-    .card-header { flex-direction: column; align-items: flex-start; gap: 15px; }
-    .avatar { width: 100px; height: 100px; }
-    .name { font-size: 2rem; }
+/* Телефоны (ширина меньше 600px) */
+@media (max-width: 600px) {
+    /* Карточка занимает почти весь экран */
+    .card-container {
+        width: 92%;
+    }
+    
+    .card {
+        padding: 25px 20px; /* Уменьшаем отступы */
+        border-radius: 20px;
+    }
+
+    /* Шапку (аватар + имя) перестраиваем в колонку */
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .avatar {
+        width: 90px;
+        height: 90px;
+    }
+
+    .name {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .description {
+        font-size: 0.95rem;
+    }
+    
+    /* Кнопки соцсетей делаем чуть больше для удобства нажатия пальцем */
+    .social-btn {
+        width: 50px;
+        height: 50px;
+    }
+    .social-btn svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+/* Очень маленькие экраны */
+@media (max-width: 380px) {
+    .name { font-size: 1.8rem; }
+    .card { padding: 20px 15px; }
 }
